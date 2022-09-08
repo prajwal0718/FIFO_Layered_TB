@@ -1,3 +1,4 @@
+// Code your design here
 module fifo(
 input clock, rd, wr,
 output full, empty,
@@ -25,15 +26,15 @@ begin
 end
   else
     begin
-      if(wr== 1'b1) && (full == 1'b0))  //if write enable is 1 and also FIFO is not full then 
+      if((wr == 1'b1) && (full == 1'b0))  //if write enable is 1 and also FIFO is not full then 
    begin
-     mem [wr_ptr]<= data_in;  //Write data into fifo if above condition satisfied
+     mem[wr_ptr]<= data_in;  //Write data into fifo if above condition satisfied
     wr_ptr =  wr_ptr + 1;  //Then increment write pointer
    end
      
      
       if((rd ==  1'b1) && (empty == 1'b0))// if read en 1 and fifo is not empty then 
-        data out <= mem[rd_ptr];  //read data from the read pointer pointing the memory location
+        data_out <= mem[rd_ptr];  //read data from the read pointer pointing the memory location
     begin
    rd_ptr<=rd_ptr + 1;  //Then increment the read pointer
     end
@@ -41,8 +42,8 @@ end
 end
   
   
-  assign empty = ((wr_ptr - rd-ptr) == 0) ? 1'b1 : 1'b0;  //when both are on same point whatever user has written inside fifo the user has already read it back this is empty condition of FIFO
+  assign empty = ((wr_ptr - rd_ptr) == 0) ? 1'b1 : 1'b0;  //when both are on same point whatever user has written inside fifo the user has already read it back this is empty condition of FIFO
   
-  assign full = ((wr_ptr - rd-ptr) == 31) ? 1'b1 : 1'b0; //user has filled all available position in fifo 
+  assign full = ((wr_ptr - rd_ptr) == 31) ? 1'b1 : 1'b0; //user has filled all available position in fifo 
   
 endmodule

@@ -1,4 +1,4 @@
-class transaction
+class transaction;
   rand bit rd,wr;
   rand bit[7:0] data_in;
   bit full , empty;
